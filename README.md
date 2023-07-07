@@ -12,6 +12,6 @@ Then it will send an automated message to devops engineer and this is the outcom
 
 
 **DESCRIPTION FOR 2ND SCRIPT**
-There are different types of process running on or machine if we want to find out very specific process running on the machine - in this case
-we are looking for all the ec2 -user process is running and the output will be printed out only with the process id.
+There are different types of process running on the machine if we want to find out very specific process running on the machine - in this case
+we are looking for all the ec2 -user process is running and the output will be printed out only with the process id of tghe ec2- user.
 
