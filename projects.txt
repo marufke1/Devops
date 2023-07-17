@@ -1,0 +1,44 @@
+!/bin/sh
+
+###########################
+## Shell script to clone a list of github repositories and run `mvn clean install` on each one of them
+##
+## Usage: put a file called `repos.txt` in the folder of the script containing the repository URLs, line by line:
+##
+##https://github.com/pulse00/Composer-Eclipse-Plugin.git
+##git@github.com:pulse00/Symfony-2-Eclipse-Plugin.git
+##etc
+###########################
+
+cwd=`pwd`
+
+while read line
+do
+  projects+=( "$line" )
+done < $cwd/repos.txt
+
+for project in "${projects[@]}"
+do
+   :
+    # try git@github.com:username/repo-name.git first
+  name=$(echo $project | awk -F/ '{print $2}')
+	if ! test -n "$name"; then
+	    name=$(echo $project | awk -F/ '{print $4}')
+	fi
+
+	# try https://github.com/username/repo-name.git
+	if ! test -n "$name"; then
+	    echo "Unable to parse directory for $project"
+	    continue
+	fi
+
+	name=${name%.git}	
+	fullpath="$cwd/$name"
+	# if the directory does not exist, clone the repos and run maven
+	if [ ! -d "name" ]; then
+		git clone $project
+		cd $name
+		mvn clean install
+		cd $cwd
+	fi
+done
